@@ -4,7 +4,7 @@ from google.protobuf.json_format import MessageToDict
 from protos import auth_pb2 as pb2
 from protos import auth_pb2_grpc as pb2_grpc
 
-class AmericanBankClient():
+class AuthClient():
 
     channel = grpc.insecure_channel('localhost:50050')
 
@@ -136,7 +136,7 @@ class AmericanBankClient():
     
         
 
-client = AmericanBankClient()
+client = AuthClient()
 
 #print(client.signup_case_a())
 #print(client.signup_case_b())
