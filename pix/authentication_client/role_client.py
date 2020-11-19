@@ -10,7 +10,7 @@ class RoleClient():
 
     stub = pb2_grpc.RoleStub(channel)
     
-    metadata = [('auth_token', 'v4gxva8SaBsC9v69zK92YpcE92BpiM')]
+    metadata = [('auth_token', 'oEBh7jcZ8QBF8iLYKT7nSc8Pj0DUcZ')]
     
 
     def get_all(self):
@@ -130,6 +130,26 @@ class RoleClient():
         except Exception as e:
             print(e.args)
 
+    def save_case_d(self):
+
+        try:
+
+            data = {
+                'name': 'megaUser',
+                'code': '002',
+                'scopes': ['00_role_get'],
+            }
+
+            request = pb2.RoleNotIdRequest(**data)
+
+            response = self.stub.save(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
     def update_case_a(self):
 
         try:
@@ -217,7 +237,7 @@ class RoleClient():
 
         try:
 
-            request = pb2.RoleIdRequest(id='5fad4d7bf75b9fae9b957db6')
+            request = pb2.RoleIdRequest(id='5fad7dcb8b95abcc04e9d15f')
 
             response = self.stub.delete(request=request, metadata=self.metadata)
 
@@ -241,6 +261,19 @@ class RoleClient():
         except Exception as e:
             print(e.args)
 
+    def delete_case_c(self):
+        try:
+
+            request = pb2.RoleIdRequest(id='5fad7dcb8b95abcc04e9d15e')
+
+            response = self.stub.delete(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
 client = RoleClient()
 
 #print(client.get_all())
@@ -250,9 +283,11 @@ client = RoleClient()
 #print(client.save_case_a())
 #print(client.save_case_b())
 #print(client.save_case_c())
+#print(client.save_case_d())
 #print(client.update_case_a())
 #print(client.update_case_b())
 #print(client.update_case_c())
 #print(client.update_case_d())
 #print(client.delete_case_a())
 #print(client.delete_case_b())
+#print(client.delete_case_c())
