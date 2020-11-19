@@ -85,6 +85,25 @@ class AuthClient():
         except Exception as e:
             print(e.args)
 
+    def signup_case_e(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "decode9",
+                'password': 'Luisbas12.',
+                'role': ''
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
     def signin_case_a(self):
         try:
             data = {
@@ -161,6 +180,7 @@ client = AuthClient()
 #print(client.signup_case_b())
 #print(client.signup_case_c())
 #print(client.signup_case_d())
+#print(client.signup_case_e())
 #print(client.signin_case_a())
 #print(client.signin_case_b())
 #print(client.signin_case_c())
