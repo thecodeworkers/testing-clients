@@ -87,7 +87,7 @@ class SessionClient():
         try:
 
             data = {
-                'app': "tumamafuemia",
+                'app': "chiripiorca",
                 'ip': '120.0.0.0',
                 'location':'la pepas',
                 'userAgent': 'pepeto',
@@ -156,7 +156,7 @@ class SessionClient():
         try:
 
             data = {
-                'app': "tumamafuemia",
+                'app': "chiripiorca",
                 'ip': '120.0.0.0',
                 'location':'la pepa',
                 'userAgent': 'pepeto',
