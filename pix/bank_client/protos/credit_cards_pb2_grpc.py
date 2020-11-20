@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from app.protos import credit_cards_pb2 as credit__cards__pb2
+from . import credit_cards_pb2 as credit__cards__pb2
 
 class CreditCardsStub(object):
     """Missing associated documentation comment in .proto file."""
