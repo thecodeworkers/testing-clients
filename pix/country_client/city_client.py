@@ -8,7 +8,7 @@ class CityClient():
 	
 	stub = city_pb2_grpc.CityStub(channel)
 
-	metadata = [('auth_token', 'tlOg1oSp8eo6E4hwQ8Ax2ico1FBTA6')]
+	metadata = [('auth_token', 'm7TRUdwpLqaBMXLXgsR6cWOnUacRmG')]
 
 	def get_all(self):
 		try:
@@ -80,7 +80,7 @@ class CityClient():
 	def save_case_b(self):
 		try:
 			data = {
-				'state': '',
+				'state': '5f3594f129ab93682403d8ff',
 				'name': ''
 			}
 
@@ -149,8 +149,8 @@ class CityClient():
 	def update_case_c(self):
 		try:
 			data = {
-				'id': '',
-				'state': '',
+				'id': '5f3594a529ab9368240305f8',
+				'state': '5f3594a529ab9368240305f6',
 				'name': ''
 			}
 
@@ -166,11 +166,11 @@ class CityClient():
 	def update_case_d(self):
 		try:
 			data = {
-				'id': '5f3594f129ab93682403d904',
-				'state': '5f3594f129ab93682403d8ff'
+				'id': '5f3594a529ab9368240305f8',
+				'state': '5f3594a529ab9368240305f6'
 			}
 
-			request = city_pb2.CountryRequest(**data)
+			request = city_pb2.CityRequest(**data)
 			response = self.stub.update(request=request, metadata=self.metadata)
 
 			return MessageToDict(response)
@@ -214,6 +214,6 @@ client = CityClient()
 # print(client.update_case_a())
 # print(client.update_case_b())
 # print(client.update_case_c())
-#print(client.update_case_d())
+# print(client.update_case_d())
 # print(client.delete_case_a())
-print(client.delete_case_b())
+# print(client.delete_case_b())
