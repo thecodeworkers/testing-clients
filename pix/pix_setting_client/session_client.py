@@ -1,21 +1,21 @@
 
 import grpc
 from google.protobuf.json_format import MessageToDict
-from protos import role_pb2 as pb2
-from protos import role_pb2_grpc as pb2_grpc
+from protos import session_pb2 as pb2
+from protos import session_pb2_grpc as pb2_grpc
 
-class RoleClient():
+class SessionClient():
 
-    channel = grpc.insecure_channel('localhost:50050')
+    channel = grpc.insecure_channel('localhost:50056')
 
-    stub = pb2_grpc.RoleStub(channel)
+    stub = pb2_grpc.SessionStub(channel)
     
     metadata = [('auth_token', 'oEBh7jcZ8QBF8iLYKT7nSc8Pj0DUcZ')]
     
 
     def get_all(self):
         try:
-            request = pb2.RoleEmpty()
+            request = pb2.SessionEmpty()
 
             response = self.stub.get_all(request=request, metadata=self.metadata)
 
@@ -29,7 +29,13 @@ class RoleClient():
     def get_one_case_a(self):
 
         try:
-            request = pb2.RoleIdRequest(id="5fa57c49a9075b215128ad4f")
+
+            data = {
+                'ip': '120.0.0.0',
+                'userAgent': 'su casa'
+            }
+
+            request = pb2.SessionOneRequest(**data)
 
             response = self.stub.get(request=request, metadata=self.metadata)
 
@@ -44,7 +50,12 @@ class RoleClient():
     def get_one_case_b(self):
 
         try:
-            request = pb2.RoleIdRequest(id="5fa57c49a9075b215128ad4k")
+
+            data = {
+                'ip': '120.0.0.1',
+                'userAgent': 'su casa'
+            }
+            request = pb2.SessionOneRequest(**data)
 
             response = self.stub.get(request=request, metadata=self.metadata)
 
@@ -56,32 +67,35 @@ class RoleClient():
             print(e.args)
             return e.args[0]
 
-    def get_one_case_c(self):
-
-        try:
-            request = pb2.RoleIdRequest(id="5fa57c49a9075b215128ad")
-
-            response = self.stub.get(request=request, metadata=self.metadata)
-
-            return MessageToDict(response)
-        except grpc.RpcError as e:
-            print(e.details())
-            return e.details()
-        except Exception as e:
-            print(e.args)
-            return e.args[0]
+    #def get_one_case_c(self):
+    #
+    #    try:
+    #        request = pb2.SessionIdRequest(id="5fa59e5959b108b64090f6")
+    #
+    #        response = self.stub.get(request=request, metadata=self.metadata)
+    #
+    #        return MessageToDict(response)
+    #    except grpc.RpcError as e:
+    #        print(e.details())
+    #        return e.details()
+    #    except Exception as e:
+    #        print(e.args)
+    #        return e.args[0]
 
     def save_case_a(self):
 
         try:
 
             data = {
-                'name': 'megaUser',
-                'code': '002',
-                'scopes': ['00_role_table'],
+                'app': "chiripiorca",
+                'ip': '120.0.0.0',
+                'location':'la pepas',
+                'userAgent': 'pepeto',
+                'valid': False,
+                'active': False,
             }
 
-            request = pb2.RoleNotIdRequest(**data)
+            request = pb2.SessionNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -96,12 +110,15 @@ class RoleClient():
         try:
 
             data = {
-                'name': '',
-                'code': '002',
-                'scopes': ['00_role_table'],
+                'app': "",
+                'ip': '120.0.0.0',
+                'location':'la pepara',
+                'userAgent': 'pepeto',
+                'valid': False,
+                'active': False,
             }
 
-            request = pb2.RoleNotIdRequest(**data)
+            request = pb2.SessionNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -116,11 +133,15 @@ class RoleClient():
         try:
 
             data = {
-                'code': '002',
-                'scopes': ['00_role_table'],
+                'app': "",
+                'ip': '120.0.0.2',
+                'location':'la pepa',
+                'userAgent': 'pepeto',
+                'valid': False,
+                'active': False,
             }
 
-            request = pb2.RoleNotIdRequest(**data)
+            request = pb2.SessionNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -135,12 +156,15 @@ class RoleClient():
         try:
 
             data = {
-                'name': 'megaUser',
-                'code': '002',
-                'scopes': ['00_role_get'],
+                'app': "chiripiorca",
+                'ip': '120.0.0.0',
+                'location':'la pepa',
+                'userAgent': 'pepeto',
+                'valid': True,
+                'active': True,
             }
 
-            request = pb2.RoleNotIdRequest(**data)
+            request = pb2.SessionNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -155,13 +179,12 @@ class RoleClient():
         try:
 
             data = {
-                'id': '5fad4d7bf75b9fae9b957db6',
-                'name': 'UserMega',
-                'code': '002',
-                'scopes': ['00_role_table'],
+                'id': '5fb5565a47c0e54420b6e4a3',
+                'valid': False,
+                'active': False,
             }
 
-            request = pb2.RoleRequest(**data)
+            request = pb2.SessionRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -176,13 +199,12 @@ class RoleClient():
         try:
 
             data = {
-                'id': '5fad4d7bf75b9fae9b957db7',
-                'name': 'UserMega',
-                'code': '002',
-                'scopes': ['00_role_table'],
+                'id': '5fb5565a47c0e54420b6e4',
+                'valid': False,
+                'active': False,
             }
 
-            request = pb2.RoleRequest(**data)
+            request = pb2.SessionRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -197,13 +219,13 @@ class RoleClient():
         try:
 
             data = {
-                'id': '5fad4d7bf75b9fae9b957db6',
-                'name': '',
-                'code': '002',
-                'scopes': ['00_role_table'],
+                'id': '5fb5565a47c0e54420b6e4a3',
+                'app': '',
+                'valid': False,
+                'active': False,
             }
 
-            request = pb2.RoleRequest(**data)
+            request = pb2.SessionRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -218,12 +240,12 @@ class RoleClient():
         try:
 
             data = {
-                'id': '5fad4d7bf75b9fae9b957db6',
-                'code': '002',
-                'scopes': ['00_role_table'],
+                'id': '5fb5565a47c0e54420b6e4a3',
+                'app': '',
+                'valid': False,
             }
 
-            request = pb2.RoleRequest(**data)
+            request = pb2.SessionRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -237,7 +259,7 @@ class RoleClient():
 
         try:
 
-            request = pb2.RoleIdRequest(id='5fad7dcb8b95abcc04e9d15f')
+            request = pb2.SessionIdRequest(id='5fb5565a47c0e54420b6e4a3')
 
             response = self.stub.delete(request=request, metadata=self.metadata)
 
@@ -251,7 +273,7 @@ class RoleClient():
 
         try:
 
-            request = pb2.RoleIdRequest(id='5fad4d7bf75b9fae9b957db6')
+            request = pb2.SessionIdRequest(id='5fb5565a47c0e54420b6e4a3')
 
             response = self.stub.delete(request=request, metadata=self.metadata)
 
@@ -261,25 +283,11 @@ class RoleClient():
         except Exception as e:
             print(e.args)
 
-    def delete_case_c(self):
-        try:
-
-            request = pb2.RoleIdRequest(id='5fad7dcb8b95abcc04e9d15e')
-
-            response = self.stub.delete(request=request, metadata=self.metadata)
-
-            return MessageToDict(response)
-        except grpc.RpcError as e:
-            print(e.details())
-        except Exception as e:
-            print(e.args)
-
-client = RoleClient()
+client = SessionClient()
 
 #print(client.get_all())
 #print(client.get_one_case_a())
 #print(client.get_one_case_b())
-#print(client.get_one_case_c())
 #print(client.save_case_a())
 #print(client.save_case_b())
 #print(client.save_case_c())
@@ -290,4 +298,3 @@ client = RoleClient()
 #print(client.update_case_d())
 #print(client.delete_case_a())
 #print(client.delete_case_b())
-#print(client.delete_case_c())

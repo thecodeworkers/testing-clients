@@ -76,7 +76,7 @@ class WhitelistClient():
         try:
 
             data = {
-                'address': 'tumamafuemia',
+                'address': 'chiripiorca',
                 'currency': 'Bitcoin',
             }
 
@@ -114,7 +114,7 @@ class WhitelistClient():
         try:
 
             data = {
-                'address': 'tumamafuemia',
+                'address': 'chiripiorca',
             }
 
             request = pb2.WhitelistNotIdRequest(**data)
@@ -133,7 +133,7 @@ class WhitelistClient():
 
             data = {
                 'id': '5fada044c719aa40e5acef34',
-                'address': 'tuhermanatambien',
+                'address': 'chiripiorquita',
                 'currency': 'Bitcoin',
             }
 
@@ -153,7 +153,7 @@ class WhitelistClient():
 
             data = {
                 'id': '5fada044c719aa40e5acef',
-                'address': 'tuhermanatambien',
+                'address': 'chiripiorquita',
                 'currency': 'Bitcoin',
             }
 
@@ -193,7 +193,7 @@ class WhitelistClient():
 
             data = {
                 'id': '5fada044c719aa40e5acef34',
-                'address': 'tuhermanatambien',
+                'address': 'chiripiorquita',
             }
 
             request = pb2.WhitelistRequest(**data)

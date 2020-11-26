@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from . import latinamerican_banks_pb2 as latinamerican__banks__pb2
+from . import session_pb2 as session__pb2
 
 
-class LatinAmericanBanksStub(object):
+class SessionStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,38 +15,38 @@ class LatinAmericanBanksStub(object):
             channel: A grpc.Channel.
         """
         self.table = channel.unary_unary(
-                '/LatinAmericanBanks/table',
-                request_serializer=latinamerican__banks__pb2.LatinAmericanBanksTableRequest.SerializeToString,
-                response_deserializer=latinamerican__banks__pb2.LatinAmericanBanksTableResponse.FromString,
+                '/Session/table',
+                request_serializer=session__pb2.SessionTableRequest.SerializeToString,
+                response_deserializer=session__pb2.SessionTableResponse.FromString,
                 )
         self.get_all = channel.unary_unary(
-                '/LatinAmericanBanks/get_all',
-                request_serializer=latinamerican__banks__pb2.LatinAmericanBankEmpty.SerializeToString,
-                response_deserializer=latinamerican__banks__pb2.LatinAmericanBanksMultipleResponse.FromString,
+                '/Session/get_all',
+                request_serializer=session__pb2.SessionEmpty.SerializeToString,
+                response_deserializer=session__pb2.SessionMultipleResponse.FromString,
                 )
         self.get = channel.unary_unary(
-                '/LatinAmericanBanks/get',
-                request_serializer=latinamerican__banks__pb2.LatinAmericanBankIdRequest.SerializeToString,
-                response_deserializer=latinamerican__banks__pb2.LatinAmericanBanksResponse.FromString,
+                '/Session/get',
+                request_serializer=session__pb2.SessionOneRequest.SerializeToString,
+                response_deserializer=session__pb2.SessionResponse.FromString,
                 )
         self.save = channel.unary_unary(
-                '/LatinAmericanBanks/save',
-                request_serializer=latinamerican__banks__pb2.LatinAmericanBankNotIdRequest.SerializeToString,
-                response_deserializer=latinamerican__banks__pb2.LatinAmericanBanksResponse.FromString,
+                '/Session/save',
+                request_serializer=session__pb2.SessionNotIdRequest.SerializeToString,
+                response_deserializer=session__pb2.SessionResponse.FromString,
                 )
         self.update = channel.unary_unary(
-                '/LatinAmericanBanks/update',
-                request_serializer=latinamerican__banks__pb2.LatinAmericanBankRequest.SerializeToString,
-                response_deserializer=latinamerican__banks__pb2.LatinAmericanBanksResponse.FromString,
+                '/Session/update',
+                request_serializer=session__pb2.SessionRequest.SerializeToString,
+                response_deserializer=session__pb2.SessionResponse.FromString,
                 )
         self.delete = channel.unary_unary(
-                '/LatinAmericanBanks/delete',
-                request_serializer=latinamerican__banks__pb2.LatinAmericanBankIdRequest.SerializeToString,
-                response_deserializer=latinamerican__banks__pb2.LatinAmericanBanksResponse.FromString,
+                '/Session/delete',
+                request_serializer=session__pb2.SessionIdRequest.SerializeToString,
+                response_deserializer=session__pb2.SessionEmpty.FromString,
                 )
 
 
-class LatinAmericanBanksServicer(object):
+class SessionServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def table(self, request, context):
@@ -86,46 +86,46 @@ class LatinAmericanBanksServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_LatinAmericanBanksServicer_to_server(servicer, server):
+def add_SessionServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'table': grpc.unary_unary_rpc_method_handler(
                     servicer.table,
-                    request_deserializer=latinamerican__banks__pb2.LatinAmericanBanksTableRequest.FromString,
-                    response_serializer=latinamerican__banks__pb2.LatinAmericanBanksTableResponse.SerializeToString,
+                    request_deserializer=session__pb2.SessionTableRequest.FromString,
+                    response_serializer=session__pb2.SessionTableResponse.SerializeToString,
             ),
             'get_all': grpc.unary_unary_rpc_method_handler(
                     servicer.get_all,
-                    request_deserializer=latinamerican__banks__pb2.LatinAmericanBankEmpty.FromString,
-                    response_serializer=latinamerican__banks__pb2.LatinAmericanBanksMultipleResponse.SerializeToString,
+                    request_deserializer=session__pb2.SessionEmpty.FromString,
+                    response_serializer=session__pb2.SessionMultipleResponse.SerializeToString,
             ),
             'get': grpc.unary_unary_rpc_method_handler(
                     servicer.get,
-                    request_deserializer=latinamerican__banks__pb2.LatinAmericanBankIdRequest.FromString,
-                    response_serializer=latinamerican__banks__pb2.LatinAmericanBanksResponse.SerializeToString,
+                    request_deserializer=session__pb2.SessionOneRequest.FromString,
+                    response_serializer=session__pb2.SessionResponse.SerializeToString,
             ),
             'save': grpc.unary_unary_rpc_method_handler(
                     servicer.save,
-                    request_deserializer=latinamerican__banks__pb2.LatinAmericanBankNotIdRequest.FromString,
-                    response_serializer=latinamerican__banks__pb2.LatinAmericanBanksResponse.SerializeToString,
+                    request_deserializer=session__pb2.SessionNotIdRequest.FromString,
+                    response_serializer=session__pb2.SessionResponse.SerializeToString,
             ),
             'update': grpc.unary_unary_rpc_method_handler(
                     servicer.update,
-                    request_deserializer=latinamerican__banks__pb2.LatinAmericanBankRequest.FromString,
-                    response_serializer=latinamerican__banks__pb2.LatinAmericanBanksResponse.SerializeToString,
+                    request_deserializer=session__pb2.SessionRequest.FromString,
+                    response_serializer=session__pb2.SessionResponse.SerializeToString,
             ),
             'delete': grpc.unary_unary_rpc_method_handler(
                     servicer.delete,
-                    request_deserializer=latinamerican__banks__pb2.LatinAmericanBankIdRequest.FromString,
-                    response_serializer=latinamerican__banks__pb2.LatinAmericanBanksResponse.SerializeToString,
+                    request_deserializer=session__pb2.SessionIdRequest.FromString,
+                    response_serializer=session__pb2.SessionEmpty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'LatinAmericanBanks', rpc_method_handlers)
+            'Session', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class LatinAmericanBanks(object):
+class Session(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -138,9 +138,9 @@ class LatinAmericanBanks(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/LatinAmericanBanks/table',
-            latinamerican__banks__pb2.LatinAmericanBanksTableRequest.SerializeToString,
-            latinamerican__banks__pb2.LatinAmericanBanksTableResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Session/table',
+            session__pb2.SessionTableRequest.SerializeToString,
+            session__pb2.SessionTableResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -154,9 +154,9 @@ class LatinAmericanBanks(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/LatinAmericanBanks/get_all',
-            latinamerican__banks__pb2.LatinAmericanBankEmpty.SerializeToString,
-            latinamerican__banks__pb2.LatinAmericanBanksMultipleResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Session/get_all',
+            session__pb2.SessionEmpty.SerializeToString,
+            session__pb2.SessionMultipleResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -170,9 +170,9 @@ class LatinAmericanBanks(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/LatinAmericanBanks/get',
-            latinamerican__banks__pb2.LatinAmericanBankIdRequest.SerializeToString,
-            latinamerican__banks__pb2.LatinAmericanBanksResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Session/get',
+            session__pb2.SessionOneRequest.SerializeToString,
+            session__pb2.SessionResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -186,9 +186,9 @@ class LatinAmericanBanks(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/LatinAmericanBanks/save',
-            latinamerican__banks__pb2.LatinAmericanBankNotIdRequest.SerializeToString,
-            latinamerican__banks__pb2.LatinAmericanBanksResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Session/save',
+            session__pb2.SessionNotIdRequest.SerializeToString,
+            session__pb2.SessionResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -202,9 +202,9 @@ class LatinAmericanBanks(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/LatinAmericanBanks/update',
-            latinamerican__banks__pb2.LatinAmericanBankRequest.SerializeToString,
-            latinamerican__banks__pb2.LatinAmericanBanksResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Session/update',
+            session__pb2.SessionRequest.SerializeToString,
+            session__pb2.SessionResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -218,8 +218,8 @@ class LatinAmericanBanks(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/LatinAmericanBanks/delete',
-            latinamerican__banks__pb2.LatinAmericanBankIdRequest.SerializeToString,
-            latinamerican__banks__pb2.LatinAmericanBanksResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Session/delete',
+            session__pb2.SessionIdRequest.SerializeToString,
+            session__pb2.SessionEmpty.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
