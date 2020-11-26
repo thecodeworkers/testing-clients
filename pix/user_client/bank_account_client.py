@@ -10,7 +10,7 @@ class BankAccountClient():
 
     stub = pb2_grpc.BankAccountStub(channel)
     
-    metadata = [('auth_token', 'v4gxva8SaBsC9v69zK92YpcE92BpiM')]
+    metadata = [('auth_token', 'v4gxva8SaBsC9v6zK92YpcE92BpiM')]
     
 
     def get_all(self):
