@@ -341,7 +341,7 @@ class BusinessSettingClient():
 
 client = BusinessSettingClient()
 
-#print(client.get_all())
+print(client.get_all())
 #print(client.get_one_case_a())
 #print(client.get_one_case_b())
 #print(client.get_one_case_c())
