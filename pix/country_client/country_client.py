@@ -8,7 +8,7 @@ class CountryClient():
 	
 	stub = country_pb2_grpc.CountryStub(channel)
 
-	metadata = [('auth_token', 'tlOg1oSp8eo6E4hwQ8Ax2ico1FBTA6')]
+	metadata = [('auth_token', 'm7TRUdwpLqaBMXLXgsR6cWOnUacRmG')]
 
 	def get_all(self):
 		try:
@@ -100,8 +100,8 @@ class CountryClient():
 	def save_case_c(self):
 		try:
 			data = {
-				'phone_prefix': '',
-				'active': ''
+				'phone_prefix': '+11',
+				'active': False
 			}
 
 			request = country_pb2.CountryNotIdRequest(**data)
@@ -117,10 +117,10 @@ class CountryClient():
 	def update_case_a(self):
 		try:
 			data = {
-				'id': '5fb38529a97757f5af9eae17',
-				'name': 'Testing',
-				'phone_prefix': '11',
-				'active': False
+				'id': '5f3594a629ab936824030714',
+				'name': 'Albanie',
+				'phone_prefix': '+355',
+				'active': True
 			}
 
 			request = country_pb2.CountryRequest(**data)
@@ -155,11 +155,9 @@ class CountryClient():
 	def update_case_c(self):
 		try:
 			data = {
-				'id': '',
+				'id': '5f3594a629ab936824030714',
 				'name': '',
-				'phone_prefix': '',
-				'active': '',
-				'states': ''
+				'phone_prefix': '+355'
 			}
 
 			request = country_pb2.CountryRequest(**data)
@@ -218,10 +216,10 @@ client = CountryClient()
 # print(client.get_one_case_c())
 # print(client.save_case_a())
 # print(client.save_case_b())
-#print(client.save_case_c())
+# print(client.save_case_c())
 # print(client.update_case_a())
 # print(client.update_case_b())
-#print(client.update_case_c())
+# print(client.update_case_c())
 # print(client.update_case_d())
 # print(client.delete_case_a())
 # print(client.delete_case_b())

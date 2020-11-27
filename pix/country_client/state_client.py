@@ -8,7 +8,7 @@ class StateClient():
 	
 	stub = state_pb2_grpc.StateStub(channel)
 
-	metadata = [('auth_token', 'tlOg1oSp8eo6E4hwQ8Ax2ico1FBTA6')]
+	metadata = [('auth_token', 'm7TRUdwpLqaBMXLXgsR6cWOnUacRmG')]
 
 	def get_all(self):
 		try:
@@ -80,7 +80,7 @@ class StateClient():
 	def save_case_b(self):
 		try:
 			data = {
-				'country': '',
+				'country': '5f3594f129ab93682403d8c0',
 				'name': ''
 			}
 
@@ -149,8 +149,8 @@ class StateClient():
 	def update_case_c(self):
 		try:
 			data = {
-				'id': '5fb38eb6a97757f5af9eae18',
-				'country': '5f3594f129ab93682403d8c0',
+				'id': '5f3594a529ab936824030613',
+				'country': '5f3594a529ab9368240305f5',
 				'name': ''
 			}
 
@@ -213,7 +213,7 @@ client = StateClient()
 # print(client.save_case_c())
 # print(client.update_case_a())
 # print(client.update_case_b())
-# print(client.update_case_c())
+print(client.update_case_c())
 #print(client.update_case_d())
 # print(client.delete_case_a())
 # print(client.delete_case_b())
