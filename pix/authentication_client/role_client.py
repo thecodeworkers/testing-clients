@@ -10,7 +10,7 @@ class RoleClient():
 
     stub = pb2_grpc.RoleStub(channel)
     
-    metadata = [('auth_token', 'oEBh7jcZ8QBF8iLYKT7nSc8Pj0DUcZ')]
+    metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
     
 
     def get_all(self):
@@ -25,7 +25,25 @@ class RoleClient():
         except Exception as e:
             print(e.args)
         
-    
+    def get_table(self):
+        try:
+            data = {
+				'page': 1,
+				'per_page': 15,
+				'search': '5fad7dcb8b95abcc04e9d15e'
+			}
+            
+            request = pb2.RoleTableRequest(**data)
+            
+            response = self.stub.table(request=request, metadata=self.metadata)
+            
+            return MessageToDict(response)
+        
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
     def get_one_case_a(self):
 
         try:
@@ -277,6 +295,7 @@ class RoleClient():
 client = RoleClient()
 
 #print(client.get_all())
+print(client.get_table())
 #print(client.get_one_case_a())
 #print(client.get_one_case_b())
 #print(client.get_one_case_c())

@@ -2,13 +2,13 @@ import grpc
 from google.protobuf.json_format import MessageToDict
 from protos import city_pb2
 from protos import city_pb2_grpc
-
+import time
 class CityClient():
 	channel = grpc.insecure_channel('localhost:50053')
 	
 	stub = city_pb2_grpc.CityStub(channel)
 
-	metadata = [('auth_token', 'm7TRUdwpLqaBMXLXgsR6cWOnUacRmG')]
+	metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
 
 	def get_all(self):
 		try:
@@ -23,6 +23,26 @@ class CityClient():
 		except Exception as e:
 			print(e.args)
 
+	def get_table(self):
+		try:
+
+			data = {
+				'page': 1,
+				'per_page': 15,
+				'search': '5f3594f029ab93682403d6ce'
+			}
+
+			request = city_pb2.CityTableRequest(**data)
+
+			response = self.stub.table(request=request, metadata=self.metadata)
+
+			return MessageToDict(response)
+
+		except grpc.RpcError as e:
+			print(e.details())
+		except Exception as e:
+			print(e.args)
+			
 	def get_one_case_a(self):
 		try:
 			request = city_pb2.CityIdRequest(id='5f3594f129ab93682403d902')
@@ -203,8 +223,10 @@ class CityClient():
 			print(e.args)
 
 client = CityClient()
+start_time = time.time()
 
-# print(client.get_all())
+#print(client.get_all())
+print(client.get_table())
 # print(client.get_one_case_a())
 # print(client.get_one_case_b())
 # print(client.get_one_case_c())
@@ -217,3 +239,4 @@ client = CityClient()
 # print(client.update_case_d())
 # print(client.delete_case_a())
 # print(client.delete_case_b())
+print("--- %s seconds ---" % (time.time() - start_time))

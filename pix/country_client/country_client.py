@@ -8,13 +8,33 @@ class CountryClient():
 	
 	stub = country_pb2_grpc.CountryStub(channel)
 
-	metadata = [('auth_token', 'm7TRUdwpLqaBMXLXgsR6cWOnUacRmG')]
+	metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
 
 	def get_all(self):
 		try:
 			request = country_pb2.CountryEmpty()
 
 			response = self.stub.get_all(request=request, metadata=self.metadata)
+
+			return MessageToDict(response)
+
+		except grpc.RpcError as e:
+			print(e.details())
+		except Exception as e:
+			print(e.args)
+
+	def get_table(self):
+		try:
+
+			data = {
+				'page': 1,
+				'per_page': 15,
+				'search': '5f3594f029ab93682403d65d'
+			}
+
+			request = country_pb2.CountryTableRequest(**data)
+
+			response = self.stub.table(request=request, metadata=self.metadata)
 
 			return MessageToDict(response)
 
@@ -211,6 +231,7 @@ class CountryClient():
 client = CountryClient()
 
 # print(client.get_all())
+print(client.get_table())
 # print(client.get_one_case_a())
 # print(client.get_one_case_b())
 # print(client.get_one_case_c())

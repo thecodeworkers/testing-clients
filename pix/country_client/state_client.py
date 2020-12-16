@@ -2,19 +2,39 @@ import grpc
 from google.protobuf.json_format import MessageToDict
 from protos import state_pb2
 from protos import state_pb2_grpc
-
+import time
 class StateClient():
 	channel = grpc.insecure_channel('localhost:50053')
 	
 	stub = state_pb2_grpc.StateStub(channel)
 
-	metadata = [('auth_token', 'm7TRUdwpLqaBMXLXgsR6cWOnUacRmG')]
+	metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
 
 	def get_all(self):
 		try:
 			request = state_pb2.StateEmpty()
 
 			response = self.stub.get_all(request=request, metadata=self.metadata)
+
+			return MessageToDict(response)
+
+		except grpc.RpcError as e:
+			print(e.details())
+		except Exception as e:
+			print(e.args)
+
+	def get_table(self):
+		try:
+
+			data = {
+				'page': 1,
+				'per_page': 15,
+				'search': '5f3594f029ab93682403d6cf'
+			}
+
+			request = state_pb2.StateTableRequest(**data)
+
+			response = self.stub.table(request=request, metadata=self.metadata)
 
 			return MessageToDict(response)
 
@@ -204,7 +224,9 @@ class StateClient():
 
 client = StateClient()
 
-# print(client.get_all())
+start_time = time.time()
+#client.get_all()
+print(client.get_table())
 # print(client.get_one_case_a())
 # print(client.get_one_case_b())
 # print(client.get_one_case_c())
@@ -213,7 +235,8 @@ client = StateClient()
 # print(client.save_case_c())
 # print(client.update_case_a())
 # print(client.update_case_b())
-print(client.update_case_c())
+#print(client.update_case_c())
 #print(client.update_case_d())
 # print(client.delete_case_a())
 # print(client.delete_case_b())
+print("--- %s seconds ---" % (time.time() - start_time))

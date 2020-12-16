@@ -10,7 +10,7 @@ class CreditCardClient():
 
     stub = pb2_grpc.CreditCardsStub(channel)
     
-    metadata = [('auth_token', 'v4gxva8SaBsC9v69zK92YpcE92BpiM')]
+    metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
     
 
     def get_all(self):
@@ -24,7 +24,25 @@ class CreditCardClient():
             print(e.details())
         except Exception as e:
             print(e.args)
+    
+    def get_table(self):
+        try:
+            data = {
+				'page': 1,
+				'per_page': 15,
+				'search': 'Bank of America'
+			}
+            
+            request = pb2.CreditCardTableRequest(**data)
+            
+            response = self.stub.table(request=request, metadata=self.metadata)
+            
+            return MessageToDict(response)
         
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
     
     def get_one_case_a(self):
 
@@ -251,6 +269,7 @@ class CreditCardClient():
 client = CreditCardClient()
 
 #print(client.get_all())
+print(client.get_table())
 #print(client.get_one_case_a())
 #print(client.get_one_case_b())
 #print(client.get_one_case_c())
