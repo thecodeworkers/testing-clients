@@ -9,7 +9,7 @@ class LanguageClient():
 
     stub = pb2_grpc.LanguageStub(channel)
     
-    metadata = [('auth_token', '0j29BMYV64qF26vYNC4QFb6BHwF7kT')]
+    metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
     
     def get_all(self): 
           try:
@@ -22,6 +22,25 @@ class LanguageClient():
               print(e.details())
           except Exception as e:
               print(e.args)
+
+    def get_table(self):
+        try:
+            data = {
+				'page': 1,
+				'per_page': 15,
+				'search': '5f92bf9bc5908a46897980f2'
+			}
+            
+            request = pb2.LanguageTableRequest(**data)
+            
+            response = self.stub.table(request=request, metadata=self.metadata)
+            
+            return MessageToDict(response)
+        
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
           
     def get_one_case_a(self):
 
@@ -236,7 +255,8 @@ class LanguageClient():
 
 client = LanguageClient()
 
-# print(client.get_all())
+#print(client.get_all())
+print(client.get_table())
 # print(client.get_one_case_a())
 # print(client.get_one_case_b())
 # print(client.get_one_case_c())
