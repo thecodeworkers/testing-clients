@@ -30,7 +30,7 @@ class RoleClient():
             data = {
 				'page': 1,
 				'per_page': 15,
-				'search': '5fad7dcb8b95abcc04e9d15e'
+				'search': ''
 			}
             
             request = pb2.RoleTableRequest(**data)

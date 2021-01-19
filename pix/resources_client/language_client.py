@@ -28,7 +28,7 @@ class LanguageClient():
             data = {
 				'page': 1,
 				'per_page': 15,
-				'search': '5f92bf9bc5908a46897980f2'
+				'search': 'es'
 			}
             
             request = pb2.LanguageTableRequest(**data)

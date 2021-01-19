@@ -29,7 +29,7 @@ class CityClient():
 			data = {
 				'page': 1,
 				'per_page': 15,
-				'search': '5f3594f029ab93682403d6ce'
+				'search': 'Valencia'
 			}
 
 			request = city_pb2.CityTableRequest(**data)

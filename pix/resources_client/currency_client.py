@@ -28,7 +28,7 @@ class CurrencyClient():
             data = {
 				'page': 1,
 				'per_page': 15,
-				'search': '1'
+				'search': 'BTC'
 			}
             
             request = pb2.CurrencyTableRequest(**data)

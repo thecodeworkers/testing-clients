@@ -29,7 +29,7 @@ class CountryClient():
 			data = {
 				'page': 1,
 				'per_page': 15,
-				'search': 'Valencia'
+				'search': ''
 			}
 
 			request = country_pb2.CountryTableRequest(**data)
@@ -230,8 +230,8 @@ class CountryClient():
 
 client = CountryClient()
 
-# print(client.get_all())
-print(client.get_table())
+print(client.get_all())
+#print(client.get_table())
 # print(client.get_one_case_a())
 # print(client.get_one_case_b())
 # print(client.get_one_case_c())

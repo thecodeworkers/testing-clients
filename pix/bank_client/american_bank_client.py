@@ -30,7 +30,7 @@ class AmericanBankClient():
             data = {
 				'page': 1,
 				'per_page': 15,
-				'search': '5f973f93ee05687f6130b9bf'
+				'search': 'Bank'
 			}
             
             request = american_banks_pb2.AmericanBanksTableRequest(**data)

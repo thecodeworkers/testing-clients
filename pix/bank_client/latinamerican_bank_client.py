@@ -30,7 +30,7 @@ class LatinAmericanBankClient():
             data = {
 				'page': 1,
 				'per_page': 15,
-				'search': '5f973f93ee05687f6130b9c5'
+				'search': 'Banesco'
 			}
             
             request = pb2.LatinAmericanBanksTableRequest(**data)

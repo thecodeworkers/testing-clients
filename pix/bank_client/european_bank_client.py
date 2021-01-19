@@ -30,7 +30,7 @@ class EuropeanBankClient():
             data = {
 				'page': 1,
 				'per_page': 15,
-				'search': '5f973f93ee05687f6130b9c2'
+				'search': 'Banco'
 			}
             
             request = pb2.EuropeanBanksTableRequest(**data)
