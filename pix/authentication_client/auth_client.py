@@ -104,6 +104,85 @@ class AuthClient():
         except Exception as e:
             print(e.args)
 
+    def signup_case_f(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': '000'
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
+    def signup_case_g(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': '000'
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
+    
+
+    def signup_case_g(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': '000'
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
+    def signup_case_h(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': '000',
+                'profile': {'name': 'Test', 'lastname': 'User'}
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
     def signin_case_a(self):
         try:
             data = {

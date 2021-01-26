@@ -6,7 +6,7 @@ from protos import session_pb2_grpc as pb2_grpc
 
 class SessionClient():
 
-    channel = grpc.insecure_channel('localhost:50056')
+    channel = grpc.insecure_channel('localhost:5005100')
 
     stub = pb2_grpc.SessionStub(channel)
     

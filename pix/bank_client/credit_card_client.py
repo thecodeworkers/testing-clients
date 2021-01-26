@@ -151,6 +151,26 @@ class CreditCardClient():
         except Exception as e:
             print(e.args)
 
+    def save_case_d(self):
+
+        try:
+
+            data = {
+                'entity': 'Bank Of America',
+                'cvcValidation': "2",
+                'numberValidation': "12",
+            }
+
+            request = pb2.CreditCardNotIdRequest(**data)
+
+            response = self.stub.save(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
     def update_case_a(self):
 
         try:
@@ -226,6 +246,27 @@ class CreditCardClient():
                 'entity': 'Bank Of America',
                 'cvcValidation': 2,
                 'numberValidation': 12,
+            }
+
+            request = pb2.CreditCardRequest(**data)
+
+            response = self.stub.update(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+    
+    def update_case_e(self):
+
+        try:
+
+            data = {
+                'id': '5fac598e5372177daef5aaed',
+                'entity': 'Bank Of America',
+                'cvcValidation': '2',
+                'numberValidation': '12',
             }
 
             request = pb2.CreditCardRequest(**data)

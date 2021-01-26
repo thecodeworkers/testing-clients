@@ -6,7 +6,7 @@ from protos import business_setting_pb2_grpc as pb2_grpc
 
 class BusinessSettingClient():
 
-    channel = grpc.insecure_channel('localhost:50056')
+    channel = grpc.insecure_channel('localhost:5005100')
 
     stub = pb2_grpc.BusinessSettingStub(channel)
     
