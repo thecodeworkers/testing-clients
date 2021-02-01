@@ -1,21 +1,21 @@
 
 import grpc
 from google.protobuf.json_format import MessageToDict
-from protos import session_pb2 as pb2
-from protos import session_pb2_grpc as pb2_grpc
+from protos import credit_cards_pb2 as pb2
+from protos import credit_cards_pb2_grpc as pb2_grpc
 
-class SessionClient():
+class CreditCardClient():
 
-    channel = grpc.insecure_channel('localhost:5005100')
+    channel = grpc.insecure_channel('localhost:50054')
 
-    stub = pb2_grpc.SessionStub(channel)
+    stub = pb2_grpc.CreditCardsStub(channel)
     
-    metadata = [('auth_token', 'oEBh7jcZ8QBF8iLYKT7nSc8Pj0DUcZ')]
+    metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
     
 
     def get_all(self):
         try:
-            request = pb2.SessionEmpty()
+            request = pb2.CreditCardEmpty()
 
             response = self.stub.get_all(request=request, metadata=self.metadata)
 
@@ -24,18 +24,30 @@ class SessionClient():
             print(e.details())
         except Exception as e:
             print(e.args)
+    
+    def get_table(self):
+        try:
+            data = {
+				'page': 1,
+				'per_page': 15,
+				'search': 'Bank of America'
+			}
+            
+            request = pb2.CreditCardTableRequest(**data)
+            
+            response = self.stub.table(request=request, metadata=self.metadata)
+            
+            return MessageToDict(response)
         
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
     
     def get_one_case_a(self):
 
         try:
-
-            data = {
-                'ip': '120.0.0.0',
-                'userAgent': 'su casa'
-            }
-
-            request = pb2.SessionOneRequest(**data)
+            request = pb2.CreditCardIdRequest(id="5f973f93ee05687f6130b9c8")
 
             response = self.stub.get(request=request, metadata=self.metadata)
 
@@ -50,12 +62,7 @@ class SessionClient():
     def get_one_case_b(self):
 
         try:
-
-            data = {
-                'ip': '120.0.0.1',
-                'userAgent': 'su casa'
-            }
-            request = pb2.SessionOneRequest(**data)
+            request = pb2.CreditCardIdRequest(id="5f973f93ee05687f6130b9c4")
 
             response = self.stub.get(request=request, metadata=self.metadata)
 
@@ -67,35 +74,33 @@ class SessionClient():
             print(e.args)
             return e.args[0]
 
-    #def get_one_case_c(self):
-    #
-    #    try:
-    #        request = pb2.SessionIdRequest(id="5fa59e5959b108b64090f6")
-    #
-    #        response = self.stub.get(request=request, metadata=self.metadata)
-    #
-    #        return MessageToDict(response)
-    #    except grpc.RpcError as e:
-    #        print(e.details())
-    #        return e.details()
-    #    except Exception as e:
-    #        print(e.args)
-    #        return e.args[0]
+    def get_one_case_c(self):
+
+        try:
+            request = pb2.CreditCardIdRequest(id="5f973f93ee05687f6130b9")
+
+            response = self.stub.get(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+            return e.details()
+        except Exception as e:
+            print(e.args)
+            return e.args[0]
 
     def save_case_a(self):
 
         try:
 
             data = {
-                'app': "chiripiorca",
-                'ip': '120.0.0.0',
-                'location':'la pepas',
-                'userAgent': 'pepeto',
-                'valid': False,
-                'active': False,
+                'entity': 'Bank Of America',
+                'cvcValidation': 2,
+                'numberValidation': 12,
+                'regex': '[0-9]?'
             }
 
-            request = pb2.SessionNotIdRequest(**data)
+            request = pb2.CreditCardNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -110,15 +115,13 @@ class SessionClient():
         try:
 
             data = {
-                'app': "",
-                'ip': '120.0.0.0',
-                'location':'la pepara',
-                'userAgent': 'pepeto',
-                'valid': False,
-                'active': False,
+                'entity': '',
+                'cvcValidation': 2,
+                'numberValidation': 12,
+                'regex': '[0-9]?'
             }
 
-            request = pb2.SessionNotIdRequest(**data)
+            request = pb2.CreditCardNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -133,15 +136,12 @@ class SessionClient():
         try:
 
             data = {
-                'app': "",
-                'ip': '120.0.0.2',
-                'location':'la pepa',
-                'userAgent': 'pepeto',
-                'valid': False,
-                'active': False,
+                'entity': 'Bank Of America',
+                'cvcValidation': 2,
+                'numberValidation': 12,
             }
 
-            request = pb2.SessionNotIdRequest(**data)
+            request = pb2.CreditCardNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -156,15 +156,12 @@ class SessionClient():
         try:
 
             data = {
-                'app': "chiripiorca",
-                'ip': '120.0.0.0',
-                'location':'la pepa',
-                'userAgent': 'pepeto',
-                'valid': True,
-                'active': True,
+                'entity': 'Bank Of America',
+                'cvcValidation': "2",
+                'numberValidation': "12",
             }
 
-            request = pb2.SessionNotIdRequest(**data)
+            request = pb2.CreditCardNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -179,12 +176,14 @@ class SessionClient():
         try:
 
             data = {
-                'id': '5fb5565a47c0e54420b6e4a3',
-                'valid': False,
-                'active': False,
+                'id': '5fac598e5372177daef5aaed',
+                'entity': 'Bank Of Americas',
+                'cvcValidation': 2,
+                'numberValidation': 12,
+                'regex': '[0-9]?'
             }
 
-            request = pb2.SessionRequest(**data)
+            request = pb2.CreditCardRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -199,12 +198,14 @@ class SessionClient():
         try:
 
             data = {
-                'id': '5fb5565a47c0e54420b6e4',
-                'valid': False,
-                'active': False,
+                'id': '5fac598e5372177daef5aae',
+                'entity': 'Bank Of America',
+                'cvcValidation': 2,
+                'numberValidation': 12,
+                'regex': '[0-9]?'
             }
 
-            request = pb2.SessionRequest(**data)
+            request = pb2.CreditCardRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -219,13 +220,14 @@ class SessionClient():
         try:
 
             data = {
-                'id': '5fb5565a47c0e54420b6e4a3',
-                'app': '',
-                'valid': False,
-                'active': False,
+                'id': '5fac598e5372177daef5aaed',
+                'entity': 'Bank Of America',
+                'cvcValidation': 2,
+                'numberValidation': 12,
+                'regex': ''
             }
 
-            request = pb2.SessionRequest(**data)
+            request = pb2.CreditCardRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -240,12 +242,34 @@ class SessionClient():
         try:
 
             data = {
-                'id': '5fb5565a47c0e54420b6e4a3',
-                'app': '',
-                'valid': False,
+                'id': '5fac598e5372177daef5aaed',
+                'entity': 'Bank Of America',
+                'cvcValidation': 2,
+                'numberValidation': 12,
             }
 
-            request = pb2.SessionRequest(**data)
+            request = pb2.CreditCardRequest(**data)
+
+            response = self.stub.update(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+    
+    def update_case_e(self):
+
+        try:
+
+            data = {
+                'id': '5fac598e5372177daef5aaed',
+                'entity': 'Bank Of America',
+                'cvcValidation': '2',
+                'numberValidation': '12',
+            }
+
+            request = pb2.CreditCardRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -259,7 +283,7 @@ class SessionClient():
 
         try:
 
-            request = pb2.SessionIdRequest(id='5fb5565a47c0e54420b6e4a3')
+            request = pb2.CreditCardIdRequest(id='5fac598e5372177daef5aaed')
 
             response = self.stub.delete(request=request, metadata=self.metadata)
 
@@ -273,7 +297,7 @@ class SessionClient():
 
         try:
 
-            request = pb2.SessionIdRequest(id='5fb5565a47c0e54420b6e4a3')
+            request = pb2.CreditCardIdRequest(id='5fac598e5372177daef5aaed')
 
             response = self.stub.delete(request=request, metadata=self.metadata)
 
@@ -283,15 +307,16 @@ class SessionClient():
         except Exception as e:
             print(e.args)
 
-client = SessionClient()
+client = CreditCardClient()
 
 #print(client.get_all())
+print(client.get_table())
 #print(client.get_one_case_a())
 #print(client.get_one_case_b())
+#print(client.get_one_case_c())
 #print(client.save_case_a())
 #print(client.save_case_b())
 #print(client.save_case_c())
-#print(client.save_case_d())
 #print(client.update_case_a())
 #print(client.update_case_b())
 #print(client.update_case_c())

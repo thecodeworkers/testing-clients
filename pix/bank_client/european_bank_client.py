@@ -1,21 +1,21 @@
 
 import grpc
 from google.protobuf.json_format import MessageToDict
-from protos import session_pb2 as pb2
-from protos import session_pb2_grpc as pb2_grpc
+from protos import european_banks_pb2 as pb2
+from protos import european_banks_pb2_grpc as pb2_grpc
 
-class SessionClient():
+class EuropeanBankClient():
 
-    channel = grpc.insecure_channel('localhost:5005100')
+    channel = grpc.insecure_channel('localhost:50054')
 
-    stub = pb2_grpc.SessionStub(channel)
+    stub = pb2_grpc.EuropeanBanksStub(channel)
     
-    metadata = [('auth_token', 'oEBh7jcZ8QBF8iLYKT7nSc8Pj0DUcZ')]
+    metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
     
 
     def get_all(self):
         try:
-            request = pb2.SessionEmpty()
+            request = pb2.EuropeanBankEmpty()
 
             response = self.stub.get_all(request=request, metadata=self.metadata)
 
@@ -25,17 +25,29 @@ class SessionClient():
         except Exception as e:
             print(e.args)
         
+    def get_table(self):
+        try:
+            data = {
+				'page': 1,
+				'per_page': 15,
+				'search': 'Banco'
+			}
+            
+            request = pb2.EuropeanBanksTableRequest(**data)
+            
+            response = self.stub.table(request=request, metadata=self.metadata)
+            
+            return MessageToDict(response)
+        
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
     
     def get_one_case_a(self):
 
         try:
-
-            data = {
-                'ip': '120.0.0.0',
-                'userAgent': 'su casa'
-            }
-
-            request = pb2.SessionOneRequest(**data)
+            request = pb2.EuropeanBankIdRequest(id="5f973f93ee05687f6130b9c2")
 
             response = self.stub.get(request=request, metadata=self.metadata)
 
@@ -50,12 +62,7 @@ class SessionClient():
     def get_one_case_b(self):
 
         try:
-
-            data = {
-                'ip': '120.0.0.1',
-                'userAgent': 'su casa'
-            }
-            request = pb2.SessionOneRequest(**data)
+            request = pb2.EuropeanBankIdRequest(id="5f973f93ee05687f6130b9c7")
 
             response = self.stub.get(request=request, metadata=self.metadata)
 
@@ -67,35 +74,33 @@ class SessionClient():
             print(e.args)
             return e.args[0]
 
-    #def get_one_case_c(self):
-    #
-    #    try:
-    #        request = pb2.SessionIdRequest(id="5fa59e5959b108b64090f6")
-    #
-    #        response = self.stub.get(request=request, metadata=self.metadata)
-    #
-    #        return MessageToDict(response)
-    #    except grpc.RpcError as e:
-    #        print(e.details())
-    #        return e.details()
-    #    except Exception as e:
-    #        print(e.args)
-    #        return e.args[0]
+    def get_one_case_c(self):
+
+        try:
+            request = pb2.EuropeanBankIdRequest(id="5f973f93ee05687f6130b9")
+
+            response = self.stub.get(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+            return e.details()
+        except Exception as e:
+            print(e.args)
+            return e.args[0]
 
     def save_case_a(self):
 
         try:
 
             data = {
-                'app': "chiripiorca",
-                'ip': '120.0.0.0',
-                'location':'la pepas',
-                'userAgent': 'pepeto',
-                'valid': False,
-                'active': False,
+                'country': 'MamaMia',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': 'FACEUS1A',
             }
 
-            request = pb2.SessionNotIdRequest(**data)
+            request = pb2.EuropeanBankNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -110,15 +115,13 @@ class SessionClient():
         try:
 
             data = {
-                'app': "",
-                'ip': '120.0.0.0',
-                'location':'la pepara',
-                'userAgent': 'pepeto',
-                'valid': False,
-                'active': False,
+                'country': 'MamaMia',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': '',
             }
 
-            request = pb2.SessionNotIdRequest(**data)
+            request = pb2.EuropeanBankNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -133,15 +136,12 @@ class SessionClient():
         try:
 
             data = {
-                'app': "",
-                'ip': '120.0.0.2',
-                'location':'la pepa',
-                'userAgent': 'pepeto',
-                'valid': False,
-                'active': False,
+                'country': 'MamaMia',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
             }
 
-            request = pb2.SessionNotIdRequest(**data)
+            request = pb2.EuropeanBankNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -151,20 +151,18 @@ class SessionClient():
         except Exception as e:
             print(e.args)
 
-    def save_case_d(self):
+    def save_case_e(self):
 
         try:
 
             data = {
-                'app': "chiripiorca",
-                'ip': '120.0.0.0',
-                'location':'la pepa',
-                'userAgent': 'pepeto',
-                'valid': True,
-                'active': True,
+                'country': 'MamaMia',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': 'FACEUS1AHHHOAOLALALA',
             }
 
-            request = pb2.SessionNotIdRequest(**data)
+            request = pb2.EuropeanBankNotIdRequest(**data)
 
             response = self.stub.save(request=request, metadata=self.metadata)
 
@@ -179,12 +177,14 @@ class SessionClient():
         try:
 
             data = {
-                'id': '5fb5565a47c0e54420b6e4a3',
-                'valid': False,
-                'active': False,
+                'id': '5fac3fde640eefd9bc6c7fd7',
+                'country': 'MamadeEl',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': 'FACEUS1A',
             }
 
-            request = pb2.SessionRequest(**data)
+            request = pb2.EuropeanBankRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -199,12 +199,14 @@ class SessionClient():
         try:
 
             data = {
-                'id': '5fb5565a47c0e54420b6e4',
-                'valid': False,
-                'active': False,
+                'id': '5fac3fde640eefd9bc6c7fd8',
+                'country': 'MamadeEl',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': 'FACEUS1A',
             }
 
-            request = pb2.SessionRequest(**data)
+            request = pb2.EuropeanBankRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -219,13 +221,14 @@ class SessionClient():
         try:
 
             data = {
-                'id': '5fb5565a47c0e54420b6e4a3',
-                'app': '',
-                'valid': False,
-                'active': False,
+                'id': '5fac3fde640eefd9bc6c7fd7',
+                'country': 'MamadeEl',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': '',
             }
 
-            request = pb2.SessionRequest(**data)
+            request = pb2.EuropeanBankRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -240,12 +243,35 @@ class SessionClient():
         try:
 
             data = {
-                'id': '5fb5565a47c0e54420b6e4a3',
-                'app': '',
-                'valid': False,
+                'id': '5fac3fde640eefd9bc6c7fd7',
+                'country': 'MamadeEl',
+                'iban': "987646521",
+                'bankName': 'FaceBank'
             }
 
-            request = pb2.SessionRequest(**data)
+            request = pb2.EuropeanBankRequest(**data)
+
+            response = self.stub.update(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
+    def update_case_e(self):
+
+        try:
+
+            data = {
+                'id': '5fac3fde640eefd9bc6c7fd7',
+                'country': 'MamadeEl',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': 'FACEUS1ALAHOLAHOLAHOLA',
+            }
+
+            request = pb2.EuropeanBankRequest(**data)
 
             response = self.stub.update(request=request, metadata=self.metadata)
 
@@ -259,7 +285,7 @@ class SessionClient():
 
         try:
 
-            request = pb2.SessionIdRequest(id='5fb5565a47c0e54420b6e4a3')
+            request = pb2.EuropeanBankIdRequest(id='5fac3fde640eefd9bc6c7fd7')
 
             response = self.stub.delete(request=request, metadata=self.metadata)
 
@@ -273,7 +299,7 @@ class SessionClient():
 
         try:
 
-            request = pb2.SessionIdRequest(id='5fb5565a47c0e54420b6e4a3')
+            request = pb2.EuropeanBankIdRequest(id='5fac3fde640eefd9bc6c7fd7')
 
             response = self.stub.delete(request=request, metadata=self.metadata)
 
@@ -283,15 +309,16 @@ class SessionClient():
         except Exception as e:
             print(e.args)
 
-client = SessionClient()
+client = EuropeanBankClient()
 
 #print(client.get_all())
+print(client.get_table())
 #print(client.get_one_case_a())
 #print(client.get_one_case_b())
+#print(client.get_one_case_c())
 #print(client.save_case_a())
 #print(client.save_case_b())
 #print(client.save_case_c())
-#print(client.save_case_d())
 #print(client.update_case_a())
 #print(client.update_case_b())
 #print(client.update_case_c())

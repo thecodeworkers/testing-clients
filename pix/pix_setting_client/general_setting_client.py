@@ -6,11 +6,11 @@ from protos import general_setting_pb2_grpc as pb2_grpc
 
 class GeneralSettingClient():
 
-    channel = grpc.insecure_channel('localhost:50056')
+    channel = grpc.insecure_channel('localhost:50100')
 
     stub = pb2_grpc.GeneralSettingStub(channel)
     
-    metadata = [('auth_token', 'oEBh7jcZ8QBF8iLYKT7nSc8Pj0DUcZ')]
+    metadata = [('auth_token', 'oO85tpozsiVo6u0vukCufS4cp4ygmt')]
     
 
     def get_all(self):
@@ -243,7 +243,7 @@ class GeneralSettingClient():
 
 client = GeneralSettingClient()
 
-#print(client.get_all())
+print(client.get_all())
 #print(client.get_one_case_a())
 #print(client.get_one_case_b())
 #print(client.get_one_case_c())
