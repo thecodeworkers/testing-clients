@@ -209,7 +209,7 @@ class CountryClient():
 
 	def delete_case_a(self):
 		try:
-			request = country_pb2.CountryIdRequest(id='5f73be2974224a639799c939')
+			request = country_pb2.CountryIdRequest(id='604697dfc1acc59e1d71b850')
 			response = self.stub.delete(request=request, metadata=self.metadata)
 
 			return MessageToDict(response)
@@ -231,12 +231,12 @@ class CountryClient():
 
 client = CountryClient()
 
-# print(client.get_all())
+print(client.get_all())
 # print(client.get_table())
 # print(client.get_one_case_a())
 # print(client.get_one_case_b())
 # print(client.get_one_case_c())
-print(client.save_case_a())
+#print(client.save_case_a())
 # print(client.save_case_b())
 # print(client.save_case_c())
 # print(client.update_case_a())
