@@ -85,7 +85,8 @@ class CountryClient():
 			data = {
 				'name': 'Testing',
 				'phone_prefix': '11',
-				'active': False
+				'active': False,
+				'code': 'B2'	
 			}
 
 			request = country_pb2.CountryNotIdRequest(**data)
@@ -208,7 +209,7 @@ class CountryClient():
 
 	def delete_case_a(self):
 		try:
-			request = country_pb2.CountryIdRequest(id='5fb38529a97757f5af9eae17')
+			request = country_pb2.CountryIdRequest(id='5f73be2974224a639799c939')
 			response = self.stub.delete(request=request, metadata=self.metadata)
 
 			return MessageToDict(response)
@@ -230,17 +231,17 @@ class CountryClient():
 
 client = CountryClient()
 
-print(client.get_all())
-#print(client.get_table())
+# print(client.get_all())
+# print(client.get_table())
 # print(client.get_one_case_a())
 # print(client.get_one_case_b())
 # print(client.get_one_case_c())
-# print(client.save_case_a())
+print(client.save_case_a())
 # print(client.save_case_b())
 # print(client.save_case_c())
 # print(client.update_case_a())
 # print(client.update_case_b())
 # print(client.update_case_c())
 # print(client.update_case_d())
-# print(client.delete_case_a())
+#print(client.delete_case_a())
 # print(client.delete_case_b())
