@@ -86,7 +86,7 @@ class CountryClient():
 				'name': 'Testing',
 				'phone_prefix': '11',
 				'active': False,
-				'code': 'B2'	
+				'code': 'C2'	
 			}
 
 			request = country_pb2.CountryNotIdRequest(**data)
@@ -95,7 +95,7 @@ class CountryClient():
 
 			return MessageToDict(response)
 		except grpc.RpcError as e:
-			print(e.details)
+			print(e.details())
 		except Exception as e:
 			print(e.args)
 
@@ -231,12 +231,12 @@ class CountryClient():
 
 client = CountryClient()
 
-print(client.get_all())
+#print(client.get_all())
 # print(client.get_table())
 # print(client.get_one_case_a())
 # print(client.get_one_case_b())
 # print(client.get_one_case_c())
-#print(client.save_case_a())
+print(client.save_case_a())
 # print(client.save_case_b())
 # print(client.save_case_c())
 # print(client.update_case_a())
