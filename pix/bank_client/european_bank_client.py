@@ -151,6 +151,27 @@ class EuropeanBankClient():
         except Exception as e:
             print(e.args)
 
+    def save_case_a(self):
+
+        try:
+
+            data = {
+                'country': 'MamaMia',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': 'FACEUS1AOUSHDIYDVGISFIUOGFSBIYV',
+            }
+
+            request = pb2.EuropeanBankNotIdRequest(**data)
+
+            response = self.stub.save(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
     def update_case_a(self):
 
         try:
@@ -226,6 +247,28 @@ class EuropeanBankClient():
                 'country': 'MamadeEl',
                 'iban': "987646521",
                 'bankName': 'FaceBank'
+            }
+
+            request = pb2.EuropeanBankRequest(**data)
+
+            response = self.stub.update(request=request, metadata=self.metadata)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+    
+    def update_case_e(self):
+
+        try:
+
+            data = {
+                'id': '5fac3fde640eefd9bc6c7fd7',
+                'country': 'MamadeEl',
+                'iban': "987646521",
+                'bankName': 'FaceBank',
+                'swift': 'FACEUS1AKUGDITULDGLUDYFUDFOTUDFOTDF',
             }
 
             request = pb2.EuropeanBankRequest(**data)

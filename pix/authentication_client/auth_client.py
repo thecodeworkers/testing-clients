@@ -4,6 +4,7 @@ from google.protobuf.json_format import MessageToDict
 from protos import auth_pb2 as pb2
 from protos import auth_pb2_grpc as pb2_grpc
 
+
 class AuthClient():
 
     channel = grpc.insecure_channel('localhost:50050')
@@ -37,7 +38,7 @@ class AuthClient():
                 'password': '',
                 'role': '000'
             }
-            
+
             request = pb2.SignupRequest(**data)
 
             response = self.stub.signup(request)
@@ -47,7 +48,7 @@ class AuthClient():
             print(e.details())
         except Exception as e:
             print(e.args)
-    
+
     def signup_case_c(self):
         try:
             data = {
@@ -55,7 +56,7 @@ class AuthClient():
                 "username": "decode91",
                 'role': '000'
             }
-            
+
             request = pb2.SignupRequest(**data)
 
             response = self.stub.signup(request)
@@ -65,7 +66,7 @@ class AuthClient():
             print(e.details())
         except Exception as e:
             print(e.args)
-    
+
     def signup_case_d(self):
         try:
             data = {
@@ -92,6 +93,136 @@ class AuthClient():
                 "username": "decode9",
                 'password': 'Luisbas12.',
                 'role': ''
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
+    def signup_case_f(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': ''
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+    
+    def signup_case_g(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "decode9",
+                'password': 'Luisbas12.',
+                'role': ''
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+
+    def signup_case_h(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': '',
+                'profile':{
+                    'name': 'Jorge',
+                    'lastname': 'Bastidas'
+                }
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+    
+    def signup_case_i(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': '',
+                'profile':{
+                    'name': 'Jorge',
+                    'lastname': 'Bastidas'
+                }
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+    
+    def signup_case_j(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': '',
+                'profile':{
+                    'name': 'Jorge',
+                    'lastname': 'Bastidas'
+                }
+            }
+
+            request = pb2.SignupRequest(**data)
+
+            response = self.stub.signup(request)
+
+            return MessageToDict(response)
+        except grpc.RpcError as e:
+            print(e.details())
+        except Exception as e:
+            print(e.args)
+    
+    def signup_case_k(self):
+        try:
+            data = {
+                'email': "jorgelo@hotmail.com",
+                "username": "",
+                'password': 'Luisbas12.',
+                'role': '',
+                'profile':{
+                    'name': 'Jorge',
+                    'lastname': 'Bastidas'
+                }
             }
 
             request = pb2.SignupRequest(**data)
@@ -137,7 +268,7 @@ class AuthClient():
             print(e.details())
         except Exception as e:
             print(e.args)
-    
+
     def signin_case_c(self):
         try:
             data = {
@@ -154,7 +285,7 @@ class AuthClient():
             print(e.details())
         except Exception as e:
             print(e.args)
-    
+
     def signin_case_d(self):
         try:
             data = {
@@ -171,17 +302,15 @@ class AuthClient():
         except Exception as e:
             print(e.args)
 
-    
-        
 
 client = AuthClient()
 
-#print(client.signup_case_a())
-#print(client.signup_case_b())
-#print(client.signup_case_c())
-#print(client.signup_case_d())
-#print(client.signup_case_e())
-#print(client.signin_case_a())
-#print(client.signin_case_b())
-#print(client.signin_case_c())
-#print(client.signin_case_d())
+# print(client.signup_case_a())
+# print(client.signup_case_b())
+# print(client.signup_case_c())
+# print(client.signup_case_d())
+# print(client.signup_case_e())
+# print(client.signin_case_a())
+# print(client.signin_case_b())
+# print(client.signin_case_c())
+# print(client.signin_case_d())
